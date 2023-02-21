@@ -14,29 +14,39 @@
 		<title>BenceM - IP tracker</title>
 	</head>
 	<body>
-		<h1>IP Address Tracker</h1>
-		<div class="input-container">
-			<input type="text" />
-			<button class="input-button"><img src="/images/icon-arrow.svg" /></button>
-		</div>
-		<div class="data-container">
-			<div class="data">
-				<p>IP ADDRESS</p>
-				<h2>THE ACTUAL DATA</h2>
+		<main class="main">
+			<h1>IP Address Tracker</h1>
+			<div class="input-container">
+				<input
+					type="text"
+					class="input"
+					placeholder="Search for any IP address or domain"
+				/>
+				<button type="submit" class="input-button">
+					<img src="/images/icon-arrow.svg" />
+				</button>
 			</div>
-			<div class="data">
-				<p>LOCATION</p>
-				<h2>THE ACTUAL DATA</h2>
+			<div class="positioner">
+				<div class="data-container">
+					<div class="data">
+						<p>IP ADDRESS</p>
+						<h2>THE ACTUAL DATA</h2>
+					</div>
+					<div class="data">
+						<p>LOCATION</p>
+						<h2>THE ACTUAL DATA</h2>
+					</div>
+					<div class="data">
+						<p>TIMEZONE</p>
+						<h2>THE ACTUAL DATA</h2>
+					</div>
+					<div class="data">
+						<p>ISP</p>
+						<h2>THE ACTUAL DATA</h2>
+					</div>
+				</div>
 			</div>
-			<div class="data">
-				<p>TIMEZONE</p>
-				<h2>THE ACTUAL DATA</h2>
-			</div>
-			<div class="data">
-				<p>ISP</p>
-				<h2>THE ACTUAL DATA</h2>
-			</div>
-		</div>
+		</main>
 		<div class="map"></div>
 	</body>
 </html>
