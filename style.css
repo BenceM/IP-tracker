@@ -74,6 +74,7 @@ h1 {
 	position: relative;
 	height: 12rem;
 	width: 100%;
+	z-index: 999;
 }
 .data-container {
 	background-color: white;
@@ -106,4 +107,20 @@ h1 {
 }
 h2 {
 	font-size: 1.8rem;
+}
+/**************************/
+/* LEAFLET*****************/
+/**************************/
+.map {
+	height: 100vh;
+}
+.leaflet-control-zoom {
+	display: none;
+}
+img.huechange {
+	filter: hue-rotate(120deg);
+}
+
+.leaflet-marker-icon {
+	filter: hue-rotate(999deg);
 }
