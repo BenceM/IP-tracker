@@ -14,7 +14,7 @@ document.documentElement.style.setProperty(
 const main = async function () {
 	try {
 		const res = await fetch(
-			`https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.GEO_KEY}&ipAddress=8.8.8.8`
+			`https://geo.ipify.org/api/v2/country,city?apiKey=${GEO_KEY}&ipAddress=8.8.8.8`
 		);
 		const data = await res.json();
 		console.log(data);
