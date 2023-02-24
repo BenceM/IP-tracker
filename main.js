@@ -2,44 +2,88 @@
 
 const mainDiv = document.querySelector(".main");
 const mapDiv = document.querySelector(".map");
-
+const dataContainer = document.querySelector(".data-container");
 const mainDivHeight = mainDiv.offsetHeight;
+const input = document.querySelector("input");
+const inputButton = document.querySelector(".input-button");
 console.log(mainDivHeight, mainDiv.clientHeight);
 document.documentElement.style.setProperty(
 	"--main-height",
 	`${mainDivHeight}px`
 );
-
-//GETTING THE IP
-const main = async function () {
-	try {
-		const res = await fetch(
-			`https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.GEO_KEY}&ipAddress=8.8.8.8`
-		);
-		const data = await res.json();
-		console.log(data);
-
-		if (!res.ok) {
-			console.log(data.description);
-			return;
-		}
-		return data;
-	} catch (error) {
-		console.error(error);
+input.addEventListener("keydown", (e) => {
+	if (e.key === "Enter") {
+		main(e);
 	}
+});
+inputButton.addEventListener("click", (e) => {
+	main(e);
+});
+let map;
+
+const main = async function (e = "") {
+	//GETTING THE IP
+	const data = async function () {
+		try {
+			const res = await fetch(
+				`https://geo.ipify.org/api/v2/country,city?apiKey=at_JQEiys1XIe6D4Ruc3P1pAohSLsdZa${
+					e === "" ? e : `&ipAddress=${input.value}`
+				}`
+			);
+			//&ipAddress=8.8.8.8
+			const data = await res.json();
+			console.log(data);
+
+			if (!res.ok) {
+				console.log(data.description);
+				return;
+			}
+			return data;
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	//Destructuring the data
+	const { ip, isp, location } = await data();
+	//populating the html
+	dataContainer.innerHTML = `
+	<div class="data">
+						<p>IP ADDRESS</p>
+						<h2>${ip}</h2>
+					</div>
+					<div class="data">
+						<p>LOCATION</p>
+						<h2>${location?.city ?? ""}, ${location.country}</h2>
+					</div>
+					<div class="data">
+						<p>TIMEZONE</p>
+						<h2>UTC ${location.timezone}</h2>
+					</div>
+					<div class="data">
+						<p>ISP</p>
+						<h2>${isp}</h2>
+					</div>
+	`;
+	console.log(location.lat, location.lng);
+
+	// LEAFLET
+
+	const createMap = function () {
+		map = L.map("map");
+		map.setView([location.lat, location.lng], 13);
+		L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+			attribution:
+				'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		}).addTo(map);
+
+		const marker = L.marker([location.lat, location.lng]).addTo(map);
+		console.log(marker);
+	};
+	const updateMap = function () {
+		map?.setView([location.lat, location.lng], 13);
+		const marker = L.marker([location.lat, location.lng]).addTo(map);
+	};
+	map ? updateMap() : createMap();
 };
 
-// LEAFLET
-const map = L.map("map").setView([51.505, -0.09], 13);
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-	attribution:
-		'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
-
-const marker = L.marker([51.5, -0.09]).addTo(map);
-console.log(marker);
-
-(async function () {
-	const response = await main();
-	console.log(response);
-})();
+main();
