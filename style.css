@@ -152,6 +152,10 @@ img.huechange {
 	.data:first-child {
 		border: none;
 	}
+	.input-button:hover {
+		background-color: #5e5e5e;
+		transition: all 0.3s;
+	}
 }
 @media (min-width: 1200px) {
 	.data-container {
