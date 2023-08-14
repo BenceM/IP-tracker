@@ -40,7 +40,7 @@ dist-ssr
 .DS_Store
 
 # The rest
-README.md
+
 README-template.md
 style-guide.md
 
