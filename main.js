@@ -7,6 +7,10 @@ const mainDivHeight = mainDiv.offsetHeight;
 const input = document.querySelector("input");
 const inputButton = document.querySelector(".input-button");
 const VITE_GEO_KEY = import.meta.env.VITE_GEO_KEY;
+
+console.log(import.meta.env); // Check the contents of import.meta.env
+const geoKey = import.meta.env.VITE_GEO_KEY;
+console.log(geoKey);
 document.documentElement.style.setProperty(
 	"--main-height",
 	`${mainDivHeight}px`,
