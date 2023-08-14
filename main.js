@@ -6,7 +6,6 @@ const dataContainer = document.querySelector(".data-container");
 const mainDivHeight = mainDiv.offsetHeight;
 const input = document.querySelector("input");
 const inputButton = document.querySelector(".input-button");
-const VITE_GEO_KEY = import.meta.env.VITE_GEO_KEY;
 
 document.documentElement.style.setProperty(
 	"--main-height",
@@ -27,9 +26,9 @@ const main = async function (e = "") {
 	const data = async function () {
 		try {
 			const res = await fetch(
-				`https://geo.ipify.org/api/v2/country,city?apiKey=${VITE_GEO_KEY}${
-					e === "" ? e : `&ipAddress=${input.value}`
-				}`,
+				`https://geo.ipify.org/api/v2/country,city?apiKey=${
+					import.meta.env.VITE_GEO_KEY
+				}${e === "" ? e : `&ipAddress=${input.value}`}`,
 			);
 			const data = await res.json();
 			input.value = "";
