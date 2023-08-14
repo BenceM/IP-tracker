@@ -6,7 +6,7 @@ const dataContainer = document.querySelector(".data-container");
 const mainDivHeight = mainDiv.offsetHeight;
 const input = document.querySelector("input");
 const inputButton = document.querySelector(".input-button");
-//const VITE_GEO_KEY = import.meta.env.VITE_GEO_KEY;
+const VITE_GEO_KEY = import.meta.env.VITE_GEO_KEY;
 document.documentElement.style.setProperty(
 	"--main-height",
 	`${mainDivHeight}px`,
