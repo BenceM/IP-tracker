@@ -6,10 +6,9 @@ const dataContainer = document.querySelector(".data-container");
 const mainDivHeight = mainDiv.offsetHeight;
 const input = document.querySelector("input");
 const inputButton = document.querySelector(".input-button");
-console.log(mainDivHeight, mainDiv.clientHeight);
 document.documentElement.style.setProperty(
 	"--main-height",
-	`${mainDivHeight}px`
+	`${mainDivHeight}px`,
 );
 input.addEventListener("keydown", (e) => {
 	if (e.key === "Enter") {
@@ -26,14 +25,12 @@ const main = async function (e = "") {
 	const data = async function () {
 		try {
 			const res = await fetch(
-				`https://geo.ipify.org/api/v2/country,city?apiKey=at_JQEiys1XIe6D4Ruc3P1pAohSLsdZa${
-					e === "" ? e : `&ipAddress=${input.value}`
-				}`
+				`https://geo.ipify.org/api/v2/country,city?apiKey=${
+					import.meta.env.VITE_GEO_KEY
+				}${e === "" ? e : `&ipAddress=${input.value}`}`,
 			);
-			//&ipAddress=8.8.8.8
 			const data = await res.json();
-			console.log(data);
-
+			input.value = "";
 			if (!res.ok) {
 				console.log(data.description);
 				return;
